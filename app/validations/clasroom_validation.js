@@ -25,7 +25,8 @@ const addFilesValidate = (data)=>{
         class_id:Joi.string().required(),
         name : Joi.string().required(),
         url: Joi.string().uri(),
-        file: Joi.allow()
+        file: Joi.allow(),
+        description : Joi.allow()
     })
 
     return schema.validate(data)

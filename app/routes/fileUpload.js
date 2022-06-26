@@ -233,8 +233,8 @@ router.delete('/delete',authorize,async (req,res) =>{
         "error" : "you are astudent"
     })
 
-    if(! mongoose.Types.ObjectId.isValid(data.class_id)) return res.status(404).json({
-        "error" : "invalid classroom id"
+    if(! mongoose.Types.ObjectId.isValid(data.file_id)) return res.status(404).json({
+        "error" : "invalid file id"
     })
 
     const {error} = deleteFilesValidate(data)
