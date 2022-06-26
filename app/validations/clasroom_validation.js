@@ -34,10 +34,7 @@ const addFilesValidate = (data)=>{
 
 const deleteFilesValidate = (data)=>{
     const schema =  Joi.object({
-        class_id:Joi.string().required(),
-        name : Joi.string().required(),
-        url: Joi.string().uri(),
-        file: Joi.allow()
+        file_id:Joi.string().required()
     })
 
     return schema.validate(data)
