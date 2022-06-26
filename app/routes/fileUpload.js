@@ -248,11 +248,27 @@ router.delete('/delete',authorize,async (req,res) =>{
     })
     const file = await Files.findOne({_id : data.file_id})
 
+    if(!file) return res.status(400).json({
+        "error" : "file does not exist"
+    })
+
     if (!(file.owner == req.user._id)) return res.status(400).json({
         "error" : "you don't own this file"
     })
 
-    await Files.findOneAndDelete({_id : data.file_id})    
+    // console.log(file.classroom);
+    // classroom = await Classroom.findOne({_id : file.classroom})
+    // console.log(classroom);
+
+
+    // console.log(mongoose.Types.ObjectId.isValid(file.classroom)) 
+    // await Classroom.updateOne({_id : file.classroom},{
+    //     $pop : {
+    //         files : data.file_id
+    //     }
+    // })
+
+    // await Files.findOneAndDelete({_id : data.file_id})    
     
     location = file.location
     fs.unlinkSync(location)

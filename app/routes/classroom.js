@@ -108,12 +108,13 @@ router.post('/feed',authorize, async (req,res) => {
     if(user.role == 0){
         // teacher feed
         tutor = await Tutor.findOne(_id = user.id)
+
         classrooms = tutor.classrooms
+        console.log(tutor.name);
         feed = {}
         for await (classobject of classrooms) {
             classroom = await Classroom.findOne({_id : classobject})
             files = classroom.files
-
             feed_class = {
                 "title" : classroom.title,
                 "files" : []
@@ -174,9 +175,6 @@ router.post('/feed/search', authorize, async (req,res) => {
     user = req.user
     if(user.role == 1){
 
-        if(! mongoose.Types.ObjectId.isValid(data.class_id)) return res.status(404).json({
-            "error" : "invalid classroom id"
-        })
 
         classroom = await Classroom.findOne({_id : data.class_id})
         student = await Student.findOne({_id : user._id})  
@@ -205,9 +203,14 @@ router.post('/feed/search', authorize, async (req,res) => {
     }
 
     if(user.role == 0){
-        classroom = await Classroom.findOne({_id : data.class_id})
+        
         if(! mongoose.Types.ObjectId.isValid(data.class_id)) return res.status(404).json({
             "error" : "invalid classroom id"
+        })
+
+        classroom = await Classroom.findOne({_id : data.class_id})
+        if(!classroom) return res.status(404).json({
+            "error" : "class does not exist"
         })
 
         if(classroom.tutor != user._id){
