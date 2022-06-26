@@ -55,7 +55,8 @@ router.post('/image', authorize, uploadImage.single('file'), async (req, res) =>
             }
         })
         return res.json({
-            "success" : "file uploaded succesfully"
+            "success" : "file uploaded succesfully",
+            "file_id" : file._id
         })
     }catch(err){
         return res.send(err)
@@ -109,7 +110,8 @@ router.post('/audio', authorize, uploadAudio.single('file'), async (req, res) =>
             }
         })
         return res.json({
-            "success" : "file uploaded succesfully"
+            "success" : "file uploaded succesfully",
+            "file_id" : file._id
         })
     }catch(err){
         return res.send(err)
@@ -163,7 +165,8 @@ router.post('/video', authorize, uploadVideo.single('file'), async (req, res) =>
             }
         })
         return res.json({
-            "success" : "file uploaded succesfully"
+            "success" : "file uploaded succesfully",
+            "file_id" : file._id
         })
     }catch(err){
         return res.send(err)
@@ -216,7 +219,8 @@ router.post('/link', authorize, async (req,res) => {
             }
         })
         return res.json({
-            "success" : "file uploaded succesfully"
+            "success" : "file uploaded succesfully",
+            "file_id" : file._id
         })
     }catch(err){
         return res.send(err)
